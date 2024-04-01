@@ -1,16 +1,27 @@
 const http = require('http');
+const fs = require('fs');
 const {handleNew} = require ('./taskHandlers'); // import the function
+
+function sendHTMLFile(res, filePath, statusCode = 200) {
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(500, {'Content-Type': 'text/html'});
+            res.end('<h1>Internal server error</h1>');
+            return;
+        }
+        res.writeHead(statusCode, {'Content-Type': 'text/html'});
+        res.end(data);
+    });
+}
 const server = http.createServer((req, res) => {
     console.log(req.url);
 
     switch (req.url) {
         case '/':
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<h1>Welcome to Tasks Management</h1>');
+            sendHTMLFile(res, './public/welcome.html');
             break;
         case '/task':
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<h1>Details of a task goes here</h1>');
+            sendHTMLFile(res, './public/task.html');
             break;
         case '/new':
             handleNew(req, res);
@@ -20,10 +31,11 @@ const server = http.createServer((req, res) => {
             res.end();
             break;
         default:
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            res.end('<h1>Not found</h1>');
+            sendHTMLFile(res, './public/not-found.html', 404);
+            break;
     }
-});
+    }
+);
 
 const port =  3000;
 server.listen(port, 'localhost',() => {
