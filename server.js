@@ -16,6 +16,10 @@ const server = http.createServer((req, res) => {
       res.writeHead(200,    { 'Content-Type': 'text/html' });
       res.end('<h1>Task form will be here</h1>');
       break;
+    case '/new-task':
+      res.writeHead(302, { 'Location': '/new' }); // status code 302 means redirection
+      res.end();
+      break;
     default:
       res.writeHead(404,    { 'Content-Type': 'text/html' });
       res.end('<h1>Not found</h1>');
