@@ -1,0 +1,25 @@
+{
+  "name": "learn_node",
+  "version": "1.0.0",
+  "description": "Learn Backend Development Using Node",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alasidig/learn_node.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongoose",
+    "nunjucks"
+  ],
+  "author": "Dr. alaaddin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alasidig/learn_node/issues"
+  },
+  "homepage": "https://github.com/alasidig/learn_node#readme"
+}
