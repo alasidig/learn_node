@@ -1,5 +1,5 @@
 const express = require('express');
-const {handleNew} = require ('./taskHandlers');
+const handleNew = require ('./taskHandlers');
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.get('/task', (req, res) => {
     res.send('<h1>Details of a task goes here</h1>');
 });
 
-app.get('/new', handleNew);
+app.use('/new', handleNew);
 
 app.get('/new-task', (req, res) => {
     res.redirect('/new');
