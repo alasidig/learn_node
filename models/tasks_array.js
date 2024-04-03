@@ -4,12 +4,18 @@ const tasks = [
     {id: 3, title: 'deploy', description: 'Deploy the web app', done: false},
 ];
 
-function getTasks() {
+function getTasks(_sort='asc') {
+    if (_sort === 'desc') {
+        tasks.sort((a, b) => b.id - a.id);
+    }
+    else{
+        tasks.sort((a, b) => a.id - b.id);
+    }
     return tasks;
 }
 
 function getTaskById(taskId) {
-    return tasks.find(task => task.id === taskId);
+    return tasks.find(task => task.id === parseInt(taskId));
 }
 
 function createTask(task) {

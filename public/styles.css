@@ -85,3 +85,9 @@ header,footer{
     text-align: center;
     margin-block-end: 20px;
 }
+
+button:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+

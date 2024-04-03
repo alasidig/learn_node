@@ -5,7 +5,7 @@
      <a href="/new" class="fab">+</a>
      <div class="task-list">
          {% for task in tasks %}
-             <a href="/task">
+             <a href="/task/{{ task.id }}">
                  <div class="task {% if task.done %}done{% else %}pending{% endif %}">
                      <h3>{{ task.title |capitalize }}</h3>
                      <p>{{ task.description }}</p>

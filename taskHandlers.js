@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     createTask(req.body);
-    res.redirect(`/`);
+    res.redirect(`/?_sort=desc`);
 });
 
 module.exports = router;

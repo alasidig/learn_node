@@ -7,21 +7,30 @@ const app = express();
 
 nunjucks.configure('views', {
     express: app,
+    autoescape:false
 });
 app.set('view engine', 'njk');
 
 app.use(express.static('public'));
 app.get('/', (req, res) => {
+    const sortParam = req.query._sort;
+    let tasksToShow = getTasks(sortParam);
     res.render('welcome', {
         subtitle:'Tasks List',
-        tasks: getTasks(),
+        tasks: tasksToShow
     });
 });
 
-app.get('/task', (req, res) => {
+app.get('/task/:taskId', (req, res) => {
+    const taskId = req.params.taskId;
+    const task = getTaskById(taskId);
+    if (!task) {
+      return  res.status(404).render('not-found');
+    }
+
     res.render('task', {
-        subtitle: 'Task 1',
-        task: getTaskById(1),
+        subtitle: task.title,
+        task
     });
 });
 
