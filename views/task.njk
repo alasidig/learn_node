@@ -1,0 +1,12 @@
+{% extends "base.njk" %}
+{% block content %}
+   
+        <div class="task-list">
+            <div class="task pending">
+                <h3>Task 1</h3>
+                <p>This is a sample task</p>
+                <button class="done-button" onclick="markDone(1)">Done</button>
+                <button class="delete-button" onclick="deleteTask(1)">Delete</button>
+            </div>
+        </div>
+        {% endblock %}

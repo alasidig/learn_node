@@ -1,14 +1,21 @@
 const express = require('express');
+const nunjucks = require('nunjucks');
 const handleNew = require ('./taskHandlers');
 
 const app = express();
+
+nunjucks.configure('views', {
+    express: app,
+});
+app.set('view engine', 'njk');
+
 app.use(express.static('public'));
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/welcome.html');
+    res.render('welcome');
 });
 
 app.get('/task', (req, res) => {
-    res.sendFile(__dirname + '/public/task.html');
+    res.render('task');
 });
 
 app.use('/new', handleNew);
@@ -18,7 +25,7 @@ app.get('/new-task', (req, res) => {
 });
 
 app.use((req, res) => {
-    res.status(404).sendFile(__dirname + '/public/not-found.html');
+    res.status(404).render('not-found');
 });
 
 const port = 3000;

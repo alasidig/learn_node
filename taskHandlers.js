@@ -4,7 +4,7 @@ const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/new.html');
+    res.render('new');
 });
 
 router.post('/', (req, res) => {
