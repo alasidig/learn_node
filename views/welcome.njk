@@ -1,27 +1,16 @@
-
- {% extends "base.njk" %}
+{% extends "base.njk" %}
  {% block content %}
-    
-<h1>Welcome to Tasks Management</h1>
-        <a href="/new" class="fab">+</a>
-        <div class="task-list">
-            <a href="/task">
-                <div class="task done">
-                    <h3>Task 1</h3>
-                    <p>This is a sample task</p>
-                </div>
-            </a>
-            <a href="/task">
-                <div class="task pending">
-                    <h3>Task 2</h3>
-                    <p>This is another sample task</p>
-                </div>
-            </a>
-            <a href="/task">
-                <div class="task pending">
-                    <h3>Task 3</h3>
-                    <p>This is the third sample task</p>
-                </div>
-            </a>
-        </div>
-   {% endblock %}
+
+     <h1>Welcome to Tasks Management</h1>
+     <a href="/new" class="fab">+</a>
+     <div class="task-list">
+         {% for task in tasks %}
+             <a href="/task">
+                 <div class="task {% if task.done %}done{% else %}pending{% endif %}">
+                     <h3>{{ task.title |capitalize }}</h3>
+                     <p>{{ task.description }}</p>
+                 </div>
+             </a>
+         {% endfor %}
+     </div>
+ {% endblock %}

@@ -1,12 +1,17 @@
 {% extends "base.njk" %}
 {% block content %}
-   
-        <div class="task-list">
-            <div class="task pending">
-                <h3>Task 1</h3>
-                <p>This is a sample task</p>
-                <button class="done-button" onclick="markDone(1)">Done</button>
-                <button class="delete-button" onclick="deleteTask(1)">Delete</button>
-            </div>
+
+    <div class="task-list">
+        <div class="task {% if task.done %}done{% else %}pending{% endif %}">
+            <h3>{{ task.title |upper }}</h3>
+            <p>{{ task.description }}</p>
+            <button
+                    class="done-button"
+                    onclick="markDone({{ task.id }})"
+                    {% if task.done %}disabled{% endif %}
+            >Done
+            </button>
+            <button class="delete-button" onclick="deleteTask({{ task.id }})">Delete</button>
         </div>
-        {% endblock %}
+    </div>
+{% endblock %}

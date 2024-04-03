@@ -1,15 +1,18 @@
 const express = require('express');
+const { createTask } = require('./models/tasks_array');
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    res.render('new');
+    res.render('new',{
+        subtitle:'New Task'
+    });
 });
 
 router.post('/', (req, res) => {
-    const taskTitle = req.body.title;
-    res.send(`Task ${taskTitle} created successfully`);
+    createTask(req.body);
+    res.redirect(`/`);
 });
 
 module.exports = router;
