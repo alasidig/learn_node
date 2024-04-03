@@ -2,13 +2,13 @@ const express = require('express');
 const handleNew = require ('./taskHandlers');
 
 const app = express();
-
+app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/welcome.html');
 });
 
 app.get('/task', (req, res) => {
-    res.send('<h1>Details of a task goes here</h1>');
+    res.sendFile(__dirname + '/public/task.html');
 });
 
 app.use('/new', handleNew);

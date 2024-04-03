@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks Management | Create a New Task</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/frontendJs.js" defer></script>
+</head>
+
+<body>
+    <header class="done"><a href="/"><img src="/logo.svg" alt="Logo"></a></header>
+    <div class="container">
+        <h2>Create a new task</h2>
+    
+        <form method="post" action="/new">
+            <label for="titleId">Enter the title of your task:</label>
+            <input type="text" name="title" id="titleId" placeholder="Title" required>
+            <label for="descriptionId">Enter a description of your task:</label>
+            <textarea name="description" id="descriptionId" cols="30" rows="10" placeholder="Description" required></textarea>
+            <p></p>
+            <button type="submit">Create Task</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Learn Node Tasks Management</p>
+    </footer>
+</body>
+
+</html>

@@ -4,10 +4,7 @@ const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
-    res.send(`<form method="post" action="/new">
-    <input type="text" name="title" placeholder="Enter a task title">
-    <button type="submit">Create</button>
-    </form>`);
+    res.sendFile(__dirname + '/public/new.html');
 });
 
 router.post('/', (req, res) => {
