@@ -81,6 +81,15 @@ textarea{
     resize: vertical;
 }
 
+input[type="checkbox"]{
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+    margin: 0;
+}
+
+
 header,footer{
     text-align: center;
     margin-block-end: 20px;

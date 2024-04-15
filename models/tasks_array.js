@@ -1,7 +1,7 @@
 const tasks = [
-    {id: 1, title: 'test', description: 'Test the web app', done: false},
-    {id: 2, title: 'design', description: 'Design the frontend', done: true},
-    {id: 3, title: 'deploy', description: 'Deploy the web app', done: false},
+    {id: 1, title: 'test', description: 'Test the web app', done: false, creator: 'user1', isPublic: true},
+    {id: 2, title: 'design', description: 'Design the frontend', done: true, creator: 'user1', isPublic: true},
+    {id: 3, title: 'deploy', description: 'Deploy the web app', done: false, creator: 'user2', isPublic: false},
 ];
 
 function getTasks(_sort='asc') {

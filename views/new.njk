@@ -6,10 +6,27 @@
     
         <form method="post" action="/new">
             <label for="titleId">Enter the title of your task:</label>
-            <input type="text" name="title" id="titleId" placeholder="Title" required>
+            <input type="text" name="title" id="titleId" placeholder="Title" required value={{title}}>
             <label for="descriptionId">Enter a description of your task:</label>
-            <textarea name="description" id="descriptionId" cols="30" rows="10" placeholder="Description" required></textarea>
+            <textarea name="description" id="descriptionId" cols="30" rows="10" placeholder="Description" required>{{description}}</textarea>
+            <label for="ownerId">Enter the owner of the task:</label>
+            <input type="text" name="owner" id="ownerId" placeholder="Owner" required  value={{owner}}>
+            <label for="publicId">Is this task publicly viewable?</label>
+            <input type="checkbox" name="isPublic" id="publicId" {% if isPublic %}checked{% endif %}>
+            
+            
             <p></p>
             <button type="submit">Create Task</button>
         </form>
+{% if errMessages %}
+    <div class="task delete-button">
+        <h4>Please correct the following error/s and submit again</h4>
+        <ul>
+            {% for err in errMessages %}
+                <li>{{ err }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
 {% endblock %}
