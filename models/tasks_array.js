@@ -1,7 +1,7 @@
 const tasks = [
-    {id: 1, title: 'test', description: 'Test the web app', done: false, creator: 'user1', isPublic: true},
-    {id: 2, title: 'design', description: 'Design the frontend', done: true, creator: 'user1', isPublic: true},
-    {id: 3, title: 'deploy', description: 'Deploy the web app', done: false, creator: 'user2', isPublic: false},
+    {id: 1, title: 'test', description: 'Test the web app', done: false, creator: 'user1', isPublic: true, imageUrl: '/images/task1.jpg'},
+    {id: 2, title: 'design', description: 'Design the frontend', done: true, creator: 'user1', isPublic: true, imageUrl: '/images/task2.jpg'},
+    {id: 3, title: 'deploy', description: 'Deploy the web app', done: false, creator: 'user2', isPublic: false, imageUrl: '/images/task3.jpg'},
 ];
 
 function getTasks(_sort='asc') {
@@ -24,7 +24,9 @@ function createTask(task) {
         title: task.title,
         description: task.description,
         done: false,
+        imageUrl: task.imageUrl,
     };
+    console.log(newTask)
     tasks.push(newTask);
     return newTask;
 }

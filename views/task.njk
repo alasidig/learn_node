@@ -4,6 +4,7 @@
     <div class="task-list">
         <div class="task {% if task.done %}done{% else %}pending{% endif %}">
             <h3>{{ task.title |upper }}</h3>
+            <img src="{{ task.imageUrl }}" alt="task">
             <p>{{ task.description }}</p>
             <button
                     class="done-button"

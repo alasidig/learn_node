@@ -4,7 +4,7 @@
  
  <h2>Create a new task</h2>
     
-        <form method="post" action="/new">
+        <form method="post" action="/new" enctype="multipart/form-data">
             <label for="titleId">Enter the title of your task:</label>
             <input type="text" name="title" id="titleId" placeholder="Title" required value={{title}}>
             <label for="descriptionId">Enter a description of your task:</label>
@@ -14,6 +14,8 @@
             <label for="publicId">Is this task publicly viewable?</label>
             <input type="checkbox" name="isPublic" id="publicId" {% if isPublic %}checked{% endif %}>
             
+            <label for="imageId">Upload an image:</label>
+            <input type="file" name="image" id="imageId">
             
             <p></p>
             <button type="submit">Create Task</button>

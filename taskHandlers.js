@@ -10,9 +10,21 @@ router.get('/', (req, res) => {
         subtitle:'New Task'
     });
 });
+const multer = require('multer');
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+const upload = multer({ storage:storage });
 
 router.post('/',
+upload.single('image'),
     body('title').trim().isLength({min: 3}).withMessage('Title must be at least 3 characters long'),
     body('description').trim().isLength({min: 5}).withMessage('Description must be at least 5 characters long'),
     (req, res) => {
@@ -30,6 +42,9 @@ router.post('/',
                 isPublic
             });
         }
+        console.log(req.file)
+        req.body.imageUrl = `/images/${req?.file?.filename ||'logo.svg'}`;
+        console.log(req.body)
         createTask(req.body);
         res.redirect(`/?_sort=desc`);
     });
