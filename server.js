@@ -5,6 +5,13 @@ const {getTasks, getTaskById } = require('./models/tasks_array');
 
 const app = express();
 
+const session = require('express-session');
+
+app.use(session({
+    secret: 's3cr3t',
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false // don't create session until something stored
+}));
 nunjucks.configure('views', {
     express: app,
     autoescape:false

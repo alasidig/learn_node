@@ -7,7 +7,8 @@ router.use(express.urlencoded({ extended: true }));
 
 router.get('/', (req, res) => {
     res.render('new',{
-        subtitle:'New Task'
+        subtitle:'New Task',
+        owner: req.session.user
     });
 });
 const multer = require('multer');
@@ -42,9 +43,9 @@ upload.single('image'),
                 isPublic
             });
         }
-        console.log(req.file)
+        console.log({user:req.session?.user})
+        req.session.user = req.body.owner; //set user to owner
         req.body.imageUrl = `/images/${req?.file?.filename ||'logo.svg'}`;
-        console.log(req.body)
         createTask(req.body);
         res.redirect(`/?_sort=desc`);
     });
