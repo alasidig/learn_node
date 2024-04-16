@@ -6,6 +6,9 @@
             <h3>{{ task.title |upper }}</h3>
             <img src="{{ task.imageUrl }}" alt="task">
             <p>{{ task.description }}</p>
+            <p>Created by: {{ task.creator.username }} -  
+                {% if task.isPublic %} Public {% else %} Private {% endif %}
+            </p>
             <button
                     class="done-button"
                     onclick="markDone({{ task.id }})"

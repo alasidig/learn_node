@@ -10,6 +10,8 @@
                      <h3>{{ task.title |capitalize }}</h3>
                      <img src="{{ task.imageUrl }}" alt="task">
                      <p>{{ task.description }}</p>
+                     <p>Created by: {{ task.creator.username }} -  
+                       {% if task.isPublic %} Public {% else %} Private{% endif %}</p>
                  </div>
              </a>
          {% endfor %}

@@ -1,7 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const handleNew = require ('./taskHandlers');
-const {getTasks, getTaskById } = require('./models/tasks_array');
+const {getTasks, getTaskById } = require('./models/tasks_db');
 
 const app = express();
 
@@ -19,18 +19,18 @@ nunjucks.configure('views', {
 app.set('view engine', 'njk');
 
 app.use(express.static('public'));
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const sortParam = req.query._sort;
-    let tasksToShow = getTasks(sortParam);
+    let tasksToShow = await getTasks(sortParam);
     res.render('welcome', {
-        subtitle:'Tasks List',
+        subtitle: 'Tasks List',
         tasks: tasksToShow
     });
 });
 
-app.get('/task/:taskId', (req, res) => {
+app.get('/task/:taskId', async (req, res) => {
     const taskId = req.params.taskId;
-    const task = getTaskById(taskId);
+    const task = await getTaskById(taskId);
     if (!task) {
       return  res.status(404).render('not-found');
     }
