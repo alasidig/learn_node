@@ -44,11 +44,29 @@ async function createTask(task) {
     task.isPublic = task.isPublic === 'on';// Convert 'on' to true
     return await Task.create(task);
 }
-
+async function updateTask(taskId, task) {
+ try{
+     return await Task.findByIdAndUpdate(taskId, task, {new: true});
+ }
+ catch (err) {
+    console.error(err);
+    return null;
+ }   
+}
+async function deleteTask(taskId) {
+    try {
+        return await Task.findByIdAndDelete(taskId);
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+}
 module.exports = {
     getTasks,
     getTaskById,
     createTask,
+    updateTask,
+    deleteTask,
     User,
     Task,
 };
