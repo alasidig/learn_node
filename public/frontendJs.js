@@ -95,3 +95,12 @@ async function loginOrRegister(evt) {
         errorsDiv.style.display = 'block'
     }
 }
+
+async function logout() {
+    await fetch('/auth/logout', {
+        method: 'POST',
+    });
+
+    localStorage.removeItem('token');
+    document.location.href = '/';
+}

@@ -1,11 +1,12 @@
 const express = require('express');
 const { createTask } = require('./models/tasks_db');
 const {body, validationResult} = require("express-validator");
+const { loginRequiredMiddleware } = require('./routes/authentication_middlewares');
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 
-router.get('/', (req, res) => {
+router.get('/', loginRequiredMiddleware, (req, res) => {
     res.render('new',{
         subtitle:'New Task',
         owner: req.session.user
@@ -44,7 +45,6 @@ upload.single('image'),
             });
         }
         console.log({user:req.session?.user})
-        req.session.user = req.body.owner; //set user to owner
         req.body.imageUrl = `/images/${req?.file?.filename ||'logo.svg'}`;
         createTask(req.body);
         res.redirect(`/?_sort=desc`);

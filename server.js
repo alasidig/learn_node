@@ -23,6 +23,7 @@ app.get('/', async (req, res) => {
     let tasksToShow = await getTasks(sortParam);
     res.render('welcome', {
         subtitle: 'Tasks List',
+        owner: req.session.user,
         tasks: tasksToShow
     });
 });
@@ -36,7 +37,10 @@ app.get('/new-task', (req, res) => {
 });
 
 app.use((req, res) => {
-    res.status(404).render('not-found');
+    res.status(404).render('not-found', {
+        subtitle: 'Not Found',
+        owner: req.session.user
+    });
 });
 
 const port = 3000;

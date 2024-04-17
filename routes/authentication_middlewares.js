@@ -17,7 +17,15 @@ const tokenAuthenticationMiddleware = (req, res, next) => {
   next();
 };
 
+const loginRequiredMiddleware = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/auth');
+  }
+  next();
+};
+
 module.exports = {
   tokenAuthenticationMiddleware,
+  loginRequiredMiddleware,
 };
 
