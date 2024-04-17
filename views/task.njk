@@ -11,11 +11,11 @@
             </p>
             <button
                     class="done-button"
-                    onclick="markDone({{ task.id }})"
+                    onclick="markDone('{{ task.id }}')"
                     {% if task.done %}disabled{% endif %}
             >Done
             </button>
-            <button class="delete-button" onclick="deleteTask({{ task.id }})">Delete</button>
+            <button class="delete-button" onclick="deleteTask('{{ task._id }}')">Delete</button>
         </div>
     </div>
 {% endblock %}
