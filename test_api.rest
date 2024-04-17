@@ -5,4 +5,37 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/task/661e1038bc9db470c3be8a9b 
+DELETE http://localhost:3000/task/661e1038bc9db470c3be8a9b
+
+### should fail if sent more than once
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username":"user3",
+    "password":"password3"
+}
+###
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+
+{
+    "username":"user3",
+    "password":"password3"
+}
+
+### should fail for missing authentication
+PUT  http://localhost:3000/task/661f7c78ac4744f09aa9ab7e 
+Content-Type: application/json
+
+{"done":true}
+
+
+### copy the token from the request to /login above
+PUT  http://localhost:3000/task/661f7c78ac4744f09aa9ab7e 
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InVzZXIzIn0.TOBHbPIHPw-xaj9jfpzhWIUvWYXfyWjjOc7DVJmkc2Y
+
+{"done":true}
+
+

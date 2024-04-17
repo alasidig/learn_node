@@ -1,5 +1,6 @@
 const express = require('express');
 const {getTaskById, updateTask, deleteTask} = require('../models/tasks_db');
+const { tokenAuthenticationMiddleware } = require('./authentication_middlewares');
 
 const router = express.Router();
 router.use(express.json());
@@ -17,7 +18,7 @@ router.get('/:taskId', async (req, res) => {
     });
 });
 
-router.put('/:taskId', async (req, res) => {
+router.put('/:taskId',tokenAuthenticationMiddleware, async (req, res) => {
     const taskId = req.params.taskId;
     const task = await updateTask(taskId, req.body);
     if (!task) {
@@ -26,7 +27,7 @@ router.put('/:taskId', async (req, res) => {
     res.json(task);
 });
 
-router.delete('/:taskId', async (req, res) => {
+router.delete('/:taskId',tokenAuthenticationMiddleware, async (req, res) => {
     const taskId = req.params.taskId;
     const task = await deleteTask(taskId);
     if (!task) {

@@ -1,4 +1,4 @@
-const {User, Task} = require('./tasks_db');
+const {User, Task, createUser} = require('./tasks_db');
 
 async function initDb() {
     try {
@@ -6,7 +6,7 @@ async function initDb() {
         await Task.deleteMany({});
         const users = []
         for (let i = 0; i < 2; i++) {
-            users.push(await User.create({username: `user${i + 1}`, password: `password${i + 1}`}));
+            users.push(await createUser({username: `user${i + 1}`, password: `password${i + 1}`}));
         }
 
         for (let i = 0; i < 3; i++) {

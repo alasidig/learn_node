@@ -28,7 +28,7 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/task/',require('./routes/task_api'));
-
+app.use('/auth', require('./routes/auth_router'));
 app.use('/new', handleNew);
 
 app.get('/new-task', (req, res) => {

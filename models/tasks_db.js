@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 mongoose.connect('mongodb://localhost/tasks');
 const taskSchema = mongoose.Schema({
     title: { type: String, required: true, trim: true },
@@ -61,12 +62,35 @@ async function deleteTask(taskId) {
         return null;
     }
 }
+
+async function createUser(user) {
+    const existingUser = await User.findOne({ username: user.username });
+    if (existingUser) {
+        return null;
+    }
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const newUser = new User({...user, password: hashedPassword});
+    return await newUser.save();
+
+}
+
+async function authenticateUser(username, password) {
+    const user = await User.findOne({ username });
+    if (!user) {
+        return null;
+    }
+    const authSuccess = await bcrypt.compare(password, user.password);
+    return authSuccess ? user : null;
+}
+
 module.exports = {
     getTasks,
     getTaskById,
     createTask,
     updateTask,
     deleteTask,
+    createUser,
+    authenticateUser,
     User,
     Task,
 };
