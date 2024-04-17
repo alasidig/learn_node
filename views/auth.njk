@@ -1,0 +1,12 @@
+{% extends "base.njk" %}
+{% block content %}
+  <form id="loginForm">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" class="form-control" minlength="3" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" class="form-control" minlength="5" required>
+    <button class="btn btn-primary" type="submit">Login</button>
+    <button class="btn delete-button" type="button" onclick="toggleForm(this)">Or Click Here to Register</button>
+  </form>
+  <div class="task delete-button mt-5" style='display:none'></div>
+{% endblock %}

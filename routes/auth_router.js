@@ -6,6 +6,10 @@ const jwt = require('jwt-simple');
 const JWT_SECRET = 'the quick brown fox jumps over the lazy dog';
 
 router.use(express.json());
+
+router.get('/', (req, res) => {
+  res.render('auth', {subtitle: 'Authentication'});
+});
 router.post('/register',  
   async (req, res) => {
     const user = await createUser(req.body);

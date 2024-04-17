@@ -70,8 +70,15 @@ form{
     grid-gap: 10px;
 }
 
-
-input[type="text"],textarea{
+.mt-5{
+    margin-top: 15px;
+}
+header{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+}
+input,textarea{
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
