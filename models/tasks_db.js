@@ -19,8 +19,8 @@ const UserSchema = mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-async function getTasks(_sort = 'asc') {
-    let tasks =  Task.find().populate('creator', 'username');
+async function getTasks(creatorId, _sort = 'asc') {
+    let tasks =  Task.find({$or: [{isPublic: true}, {creator: creatorId}] }).populate('creator', 'username');
     if(_sort === 'desc') tasks.sort({ _id: -1 });
     else tasks.sort({ _id: 1 });
     return tasks;

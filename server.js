@@ -6,6 +6,7 @@ const {getTasks } = require('./models/tasks_db');
 const app = express();
 
 const session = require('express-session');
+const { loginRequiredMiddleware } = require('./routes/authentication_middlewares');
 
 app.use(session({
     secret: 's3cr3t',
@@ -18,9 +19,9 @@ nunjucks.configure('views', {
 });
 app.set('view engine', 'njk');
 app.use(express.static('public'));
-app.get('/', async (req, res) => {
+app.get('/',loginRequiredMiddleware, async (req, res) => {
     const sortParam = req.query._sort;
-    let tasksToShow = await getTasks(sortParam);
+    let tasksToShow = await getTasks(req.session.userId,sortParam);
     res.render('welcome', {
         subtitle: 'Tasks List',
         owner: req.session.user,

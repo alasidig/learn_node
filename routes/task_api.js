@@ -24,6 +24,10 @@ router.get('/:taskId', loginRequiredMiddleware, async (req, res) => {
 
 router.put('/:taskId',tokenAuthenticationMiddleware, async (req, res) => {
     const taskId = req.params.taskId;
+    const matchingTask = await getTaskById(taskId);
+    if (!matchingTask|| matchingTask.creator.username !== req.username) {
+        return res.status(403).json({error: `You don't have permission to update this task`});
+    }
     const task = await updateTask(taskId, req.body);
     if (!task) {
       return  res.status(404).json({error: `Task with id ${taskId} not found`});
@@ -33,6 +37,10 @@ router.put('/:taskId',tokenAuthenticationMiddleware, async (req, res) => {
 
 router.delete('/:taskId',tokenAuthenticationMiddleware, async (req, res) => {
     const taskId = req.params.taskId;
+    const matchingTask = await getTaskById(taskId);
+    if (!matchingTask|| matchingTask.creator.username !== req.username) {
+        return res.status(403).json({error: `You don't have permission to delete this task`});
+    }
     const task = await deleteTask(taskId);
     if (!task) {
       return  res.status(404).json({error: `Task with id ${taskId} not found`});

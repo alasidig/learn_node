@@ -21,6 +21,7 @@ router.post('/register',
     }
     const token = jwt.encode({username:user.username}, JWT_SECRET);
     req.session.user = user.username;
+    req.session.userId = user._id;
     res.status(201).json({token});
 });
 
@@ -32,6 +33,7 @@ router.post('/login',
       return res.status(401).json({error: 'Invalid credentials'});
     }
     req.session.user = user.username;
+    req.session.userId = user._id;
     const token = jwt.encode({username}, JWT_SECRET);
     res.json({token});
 });

@@ -9,6 +9,8 @@
             <p>Created by: {{ task.creator.username }} -  
                 {% if task.isPublic %} Public {% else %} Private {% endif %}
             </p>
+            {% if task.creator.username == owner %}
+                
             <button
                     class="done-button"
                     onclick="markDone('{{ task.id }}')"
@@ -16,6 +18,7 @@
             >Done
             </button>
             <button class="delete-button" onclick="deleteTask('{{ task._id }}')">Delete</button>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

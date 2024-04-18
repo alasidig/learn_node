@@ -32,7 +32,7 @@ upload.single('image'),
     (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const {title, description, owner, isPublic} = req.body;
+            const {title, description, isPublic} = req.body;
             const errMessages = errors.array().map(err => err.msg);
             console.log(errMessages);
             return res.status(400).render('new', {
@@ -40,12 +40,12 @@ upload.single('image'),
                 errMessages,
                 title,
                 description,
-                owner,
                 isPublic
             });
         }
         console.log({user:req.session?.user})
         req.body.imageUrl = `/images/${req?.file?.filename ||'logo.svg'}`;
+        req.body.owner = req.session.user;
         createTask(req.body);
         res.redirect(`/?_sort=desc`);
     });
